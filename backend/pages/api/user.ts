@@ -1,40 +1,49 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiRequest, NextApiResponse } from "next";
 import { DefaultResponseMessage } from "../../types/DefaultResponseMessage";
 import { User } from "../../types/User";
+import connectDB from "../../middlewares/connectDB";
+import { UserModel } from "../../models/UserModel";
 
-
-
-export default function handler(
+const handler = async (
   req: NextApiRequest,
   res: NextApiResponse<DefaultResponseMessage>
-) {
+) => {
   try {
     if (req.method !== "POST") {
       res.status(400).json({ error: "Método solicitado não existe." });
       return;
     }
 
-    if(req.body){
-        const user = req.body as User;
+    if (req.body) {
+      const user = req.body as User;
 
-        if(req.body){
-            const user = req.body as User;
-            if(user.name && user.name.length > 2
-                && user.email && user.email.includes('@') && user.email.includes('.') 
-                && user.email.length > 5
-                && user.password && user.password.length > 3){
-                res.status(200).json({msg: 'Usuario criado'});
-            }
-        }        
+      if (!user.name || user.name.length < 3) {
+        res.status(400).json({ error: "Nome do usuário inválido" });
+        return;
+      }
+
+      if (!user.email || !user.email.includes('@') || !user.email.includes('.')) {
+        res.status(400).json({ error: 'E-mail do usuário inválido' });
+        return;
+      }
+
+      if (!user.password || user.password.length < 4) {
+        res.status(400).json({ error: 'Senha do usuário inválida' });
+        return;
+      }
+
+      await UserModel.create(user);
+      res.status(200).json({ error: 'Usuário criado com sucesso!' });
+      return;
     }
-    
-    res.status(400).json({error: 'Parametros de entrada invalidos'});
 
+    res.status(400).json({ error: 'Parametros de entrada invalidos' });
   } catch (error) {
-    console.log("Ocorreu um erro ao criar o usuário?");
+    console.log('Ocorreu um erro ao criar o usuário?');
     res.status(500).json({
-      error: "Ocorreu um erro ao criar o usuário, tente novamente.",
+      error: 'Ocorreu um erro ao criar o usuário, tente novamente.',
     });
   }
-  
-}
+};
+
+export default connectDB(handler);
