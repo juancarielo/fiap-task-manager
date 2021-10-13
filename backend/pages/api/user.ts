@@ -1,13 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import md5 from 'md5';
-import { DefaultResponseMessage } from "../../types/DefaultResponseMessage";
-import { User } from "../../types/User";
+
 import connectDB from "../../middlewares/connectDB";
 import { UserModel } from "../../models/UserModel";
+import { User } from "../../types/User";
+import { DefaultResponse } from "../../types/DefaultResponse";
 
 const handler = async (
   req: NextApiRequest,
-  res: NextApiResponse<DefaultResponseMessage>
+  res: NextApiResponse<DefaultResponse>
 ) => {
   try {
     if (req.method !== "POST") {
@@ -28,7 +29,9 @@ const handler = async (
         return;
       }
 
-      if (!user.password || user.password.length < 4) {
+      var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+
+      if (!strongRegex.test(user.password)) {
         res.status(400).json({ error: 'Senha do usuário inválida' });
         return;
       }
