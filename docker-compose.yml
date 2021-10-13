@@ -1,4 +1,4 @@
-version: '3.1'
+version: "3.1"
 
 services:
 
@@ -6,17 +6,26 @@ services:
     image: mongo:${MONGO_TAG}
     container_name: "${PROJECT_NAME}_mongo"
     restart: "no"
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo:/data/db
+    networks:
+      - mongo_network
 
   mongo-express:
-    image: mongo-express
+    image: mongo-express:latest
     container_name: "${PROJECT_NAME}_mongo_express"
     restart: "no"
     ports:
       - 8081:8081
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: example
-      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+    depends_on:
+      - mongo
+    networks:
+      - mongo_network
+
+volumes:
+  mongo:
+
+networks:
+  mongo_network:
