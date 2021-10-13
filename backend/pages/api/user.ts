@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import md5 from 'md5';
 import { DefaultResponseMessage } from "../../types/DefaultResponseMessage";
 import { User } from "../../types/User";
 import connectDB from "../../middlewares/connectDB";
@@ -32,7 +33,19 @@ const handler = async (
         return;
       }
 
-      await UserModel.create(user);
+      const userExist = await UserModel.find({ email: user.email });
+
+      if (userExist && userExist.length > 0) {
+        res.status(400).json({ error: "Já existe um usuário com o e-mail informado" });
+        return;
+      }
+
+      const final = {
+        ...user,
+        password: md5(user.password),
+      };
+
+      await UserModel.create(final);
       res.status(200).json({ error: 'Usuário criado com sucesso!' });
       return;
     }

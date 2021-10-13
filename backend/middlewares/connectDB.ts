@@ -5,7 +5,7 @@ const connectDB = (handler: NextApiHandler) =>
   async (req: NextApiRequest, res: NextApiResponse) => {
     console.log("MongoDB readyState", mongoose.connections[0].readyState);
 
-    if (!mongoose.connections[0].readyState) {
+    if (mongoose.connections[0].readyState) {
       return handler(req, res);
     }
 
