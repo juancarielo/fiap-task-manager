@@ -13,6 +13,10 @@
         max-width: 300px;
     }
 
+    button {
+        cursor: pointer;
+    }
+
     .disabled {
         background-color: $mediumGreyColor;
     }
