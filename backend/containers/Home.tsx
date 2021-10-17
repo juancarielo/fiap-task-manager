@@ -6,17 +6,18 @@ import { Task } from "../types/Task";
 import { Header } from "../components/Header";
 import { Filter } from "../components/Filter";
 import { List } from "../components/List";
+import { Footer } from "../components/Footer";
 
 const Home: NextPage<AcessTokenProps> = ({ setAcessToken }) => {
     const [tasks, setTasks] = useState<Task[]>([
-        // { _id: "1", userId: "ss", name: "teste", finishPrevisionDate: new Date(), finishDate: new Date() },
-        // {
-        //     _id: "1",
-        //     userId: "ss",
-        //     name: "teste",
-        //     finishPrevisionDate: new Date(),
-        //     // finishDate: new Date(),
-        // },
+        { _id: "1", userId: "ss", name: "teste", finishPrevisionDate: new Date(), finishDate: new Date() },
+        {
+            _id: "1",
+            userId: "ss",
+            name: "teste",
+            finishPrevisionDate: new Date(),
+            // finishDate: new Date(),
+        },
     ]);
 
     const [periodoDe, setPeriodoDe] = useState("");
@@ -49,6 +50,8 @@ const Home: NextPage<AcessTokenProps> = ({ setAcessToken }) => {
             />
 
             <List tasks={tasks} />
+
+            <Footer />
         </>
     );
 };
