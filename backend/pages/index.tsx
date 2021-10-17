@@ -4,19 +4,19 @@ import { Login } from "../containers/Login";
 import { Home } from "../containers/Home";
 
 const Index: NextPage = () => {
-    const [acessToken, setAcessToken] = useState("");
+    const [accessToken, setAccessToken] = useState("");
 
     useEffect(() => {
         if (typeof window !== "undefined") {
-            const token = localStorage.getItem("acessToken");
+            const token = localStorage.getItem("accessToken");
 
             if (token) {
-                setAcessToken(token);
+                setAccessToken(token);
             }
         }
     });
 
-    return !acessToken ? <Login setAcessToken={setAcessToken} /> : <Home setAcessToken={setAcessToken} />;
+    return !accessToken ? <Login setAccessToken={setAccessToken} /> : <Home setAccessToken={setAccessToken} />;
 };
 
 export default Index;

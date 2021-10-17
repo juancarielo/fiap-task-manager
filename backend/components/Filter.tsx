@@ -4,8 +4,10 @@ import { useState } from "react";
 type FilterProps = {
     periodoDe: string;
     setPeriodoDe(s: string): void;
+
     periodoAte: string;
     setPeriodoAte(s: string): void;
+
     status: number;
     setStatus(n: number): void;
 };

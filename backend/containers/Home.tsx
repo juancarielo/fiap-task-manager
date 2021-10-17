@@ -1,36 +1,53 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { useState } from "react";
-import { AcessTokenProps } from "../types/AcessTokenProps";
+import { useState, useEffect } from "react";
+import { AccessTokenProps } from "../types/AccessTokenProps";
 import { Task } from "../types/Task";
 import { Header } from "../components/Header";
 import { Filter } from "../components/Filter";
 import { List } from "../components/List";
 import { Footer } from "../components/Footer";
+import { executeRequest } from "../services/api";
 
-const Home: NextPage<AcessTokenProps> = ({ setAcessToken }) => {
-    const [tasks, setTasks] = useState<Task[]>([
-        { _id: "1", userId: "ss", name: "teste", finishPrevisionDate: new Date(), finishDate: new Date() },
-        {
-            _id: "1",
-            userId: "ss",
-            name: "teste",
-            finishPrevisionDate: new Date(),
-            // finishDate: new Date(),
-        },
-    ]);
-
+const Home: NextPage<AccessTokenProps> = ({ setAccessToken }) => {
+    const [tasks, setTasks] = useState<Task[]>([]);
     const [periodoDe, setPeriodoDe] = useState("");
     const [periodoAte, setPeriodoAte] = useState("");
     const [status, setStatus] = useState(0);
 
     const sair = () => {
-        localStorage.removeItem("acessToken");
+        localStorage.removeItem("accessToken");
         localStorage.removeItem("userName");
         localStorage.removeItem("userEmail");
 
-        setAcessToken("");
+        setAccessToken("");
     };
+
+    const getFilteredList = async () => {
+        try {
+            let filtros = "?status=" + status;
+
+            if (periodoDe) {
+                filtros += "&finishPrevisionStart=" + periodoDe;
+            }
+
+            if (periodoAte) {
+                filtros += "&finishPrevisionEnd=" + periodoAte;
+            }
+
+            console.log(filtros)
+            const result = await executeRequest("task" + filtros, "GET");
+            if (result && result.data) {
+                setTasks(result.data);
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+    useEffect(() => {
+        getFilteredList();
+    }, [periodoDe, periodoAte, status]);
 
     return (
         <>
@@ -51,7 +68,7 @@ const Home: NextPage<AcessTokenProps> = ({ setAcessToken }) => {
 
             <List tasks={tasks} />
 
-            <Footer />
+            {/* <Footer /> */}
         </>
     );
 };

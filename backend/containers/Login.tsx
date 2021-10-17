@@ -2,9 +2,9 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
 import { executeRequest } from "../services/api";
-import { AcessTokenProps } from "../types/AcessTokenProps";
+import { AccessTokenProps } from "../types/AccessTokenProps";
 
-const Login: NextPage<AcessTokenProps> = ({ setAcessToken }) => {
+const Login: NextPage<AccessTokenProps> = ({ setAccessToken }) => {
     const [login, setLogin] = useState("juancarielo@gmail.com");
     const [password, setPassword] = useState("Admin@123");
 
@@ -34,11 +34,11 @@ const Login: NextPage<AcessTokenProps> = ({ setAcessToken }) => {
             if (result && result.data) {
                 console.log(result);
 
-                localStorage.setItem("acessToken", result.data.token);
+                localStorage.setItem("accessToken", result.data.token);
                 localStorage.setItem("userName", result.data.name);
                 localStorage.setItem("userEmail", result.data.email);
 
-                setAcessToken(result.data.token);
+                setAccessToken(result.data.token);
             } else {
                 setMsgErro("Não foi possível realizar o login, tente novamente!");
             }
