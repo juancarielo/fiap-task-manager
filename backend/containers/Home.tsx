@@ -2,10 +2,17 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
 import { AcessTokenProps } from "../types/AcessTokenProps";
+import { Task } from "../types/Task";
 import { Header } from "../components/Header";
 import { Filter } from "../components/Filter";
+import { List } from "../components/List";
 
 const Home: NextPage<AcessTokenProps> = ({ setAcessToken }) => {
+
+    const [tasks, setTasks] = useState<Task[]>([
+
+    ])
+
     const [periodoDe, setPeriodoDe] = useState("");
     const [periodoAte, setPeriodoAte] = useState("");
     const [status, setStatus] = useState(0);
@@ -34,6 +41,8 @@ const Home: NextPage<AcessTokenProps> = ({ setAcessToken }) => {
                 setPeriodoAte={setPeriodoAte}
                 setStatus={setStatus}
             />
+
+            <List tasks={tasks} />
         </>
     );
 };
