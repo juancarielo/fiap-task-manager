@@ -12,7 +12,7 @@ const List: NextPage<ListProps> = ({ tasks }) => {
         <>
             <div className={"container-listagem" + (tasks && tasks.length === 0 ? " vazia" : "")}>
                 {tasks && tasks.length > 0 ? (
-                    tasks.map((t) => <Item task={t} />)
+                    tasks.map((t) => <Item task={t} key={t._id} />)
                 ) : (
                     <>
                         <img src="/empty-list.svg" alt="Nenhuma tarefa encontrada" />

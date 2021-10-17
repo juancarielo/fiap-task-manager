@@ -8,10 +8,16 @@ import { Filter } from "../components/Filter";
 import { List } from "../components/List";
 
 const Home: NextPage<AcessTokenProps> = ({ setAcessToken }) => {
-
     const [tasks, setTasks] = useState<Task[]>([
-
-    ])
+        // { _id: "1", userId: "ss", name: "teste", finishPrevisionDate: new Date(), finishDate: new Date() },
+        // {
+        //     _id: "1",
+        //     userId: "ss",
+        //     name: "teste",
+        //     finishPrevisionDate: new Date(),
+        //     // finishDate: new Date(),
+        // },
+    ]);
 
     const [periodoDe, setPeriodoDe] = useState("");
     const [periodoAte, setPeriodoAte] = useState("");
