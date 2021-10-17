@@ -1,15 +1,14 @@
-import type { NextPage } from 'next';
-import Head from 'next/head';
-import { useState } from 'react';
-import { executeRequest } from '../services/api';
-import { AcessTokenProps } from '../types/AcessTokenProps';
+import type { NextPage } from "next";
+import Head from "next/head";
+import { useState } from "react";
+import { executeRequest } from "../services/api";
+import { AcessTokenProps } from "../types/AcessTokenProps";
 
 const Login: NextPage<AcessTokenProps> = ({ setAcessToken }) => {
+    const [login, setLogin] = useState("juancarielo@gmail.com");
+    const [password, setPassword] = useState("Admin@123");
 
-    const [login, setLogin] = useState('juancarielo@gmail.com');
-    const [password, setPassword] = useState('Admin@123');
-
-    const [msgErro, setMsgErro] = useState('');
+    const [msgErro, setMsgErro] = useState("");
     const [isLoading, setLoading] = useState(false);
 
     const doLogin = async (e: any) => {
@@ -18,7 +17,7 @@ const Login: NextPage<AcessTokenProps> = ({ setAcessToken }) => {
             e.preventDefault();
 
             if (!login || !password) {
-                setMsgErro('Parâmetros de entrada inválidos');
+                setMsgErro("Parâmetros de entrada inválidos");
                 setLoading(false);
                 return;
             }
@@ -28,16 +27,16 @@ const Login: NextPage<AcessTokenProps> = ({ setAcessToken }) => {
                 password,
             };
 
-            const result = await executeRequest('login', 'POST', body);
+            const result = await executeRequest("login", "POST", body);
 
             setMsgErro("");
 
             if (result && result.data) {
                 console.log(result);
 
-                localStorage.setItem('acessToken', result.data.token);
-                localStorage.setItem('userName', result.data.name);
-                localStorage.setItem('userEmail', result.data.email);
+                localStorage.setItem("acessToken", result.data.token);
+                localStorage.setItem("userName", result.data.name);
+                localStorage.setItem("userEmail", result.data.email);
 
                 setAcessToken(result.data.token);
             } else {

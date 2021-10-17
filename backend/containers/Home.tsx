@@ -1,15 +1,21 @@
-import type { NextPage } from 'next';
-import Head from 'next/head';
-import { Header } from '../components/Header';
-import { AcessTokenProps } from '../types/AcessTokenProps';
+import type { NextPage } from "next";
+import Head from "next/head";
+import { useState } from "react";
+import { AcessTokenProps } from "../types/AcessTokenProps";
+import { Header } from "../components/Header";
+import { Filter } from "../components/Filter";
 
 const Home: NextPage<AcessTokenProps> = ({ setAcessToken }) => {
-    const sair = () => {
-        localStorage.removeItem('acessToken');
-        localStorage.removeItem('userName');
-        localStorage.removeItem('userEmail');
+    const [periodoDe, setPeriodoDe] = useState("");
+    const [periodoAte, setPeriodoAte] = useState("");
+    const [status, setStatus] = useState(0);
 
-        setAcessToken('');
+    const sair = () => {
+        localStorage.removeItem("acessToken");
+        localStorage.removeItem("userName");
+        localStorage.removeItem("userEmail");
+
+        setAcessToken("");
     };
 
     return (
@@ -19,6 +25,15 @@ const Home: NextPage<AcessTokenProps> = ({ setAcessToken }) => {
             </Head>
 
             <Header sair={sair} />
+
+            <Filter
+                periodoDe={periodoDe}
+                periodoAte={periodoAte}
+                status={status}
+                setPeriodoDe={setPeriodoDe}
+                setPeriodoAte={setPeriodoAte}
+                setStatus={setStatus}
+            />
         </>
     );
 };
