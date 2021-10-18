@@ -115,7 +115,7 @@ const Home: NextPage<AccessTokenProps> = ({ setAccessToken }) => {
                 setStatus={setStatus}
             />
 
-            <List tasks={tasks} />
+            <List tasks={tasks} getFilteredList={getFilteredList} />
 
             <Footer setShowModal={setShowModal} />
 

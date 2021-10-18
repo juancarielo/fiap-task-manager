@@ -1,19 +1,17 @@
-import type { NextPage } from "next";
-import { useState } from "react";
+import type { NextPage } from 'next'
+import { useState } from 'react'
 
 type FilterProps = {
-    periodoDe: string;
-    setPeriodoDe(s: string): void;
-
-    periodoAte: string;
-    setPeriodoAte(s: string): void;
-
-    status: number;
-    setStatus(n: number): void;
-};
+    periodoDe: string
+    setPeriodoDe(s: string): void
+    periodoAte: string
+    setPeriodoAte(s: string): void
+    status: number
+    setStatus(n: number): void
+}
 
 const Filter: NextPage<FilterProps> = ({ periodoDe, periodoAte, status, setPeriodoDe, setPeriodoAte, setStatus }) => {
-    const [showFilters, setShowFilter] = useState(false);
+    const [showFilters, setShowFilter] = useState(false)
 
     return (
         <div className="container-filtros">
@@ -61,7 +59,7 @@ const Filter: NextPage<FilterProps> = ({ periodoDe, periodoAte, status, setPerio
                 </div>
             )}
         </div>
-    );
-};
+    )
+}
 
-export { Filter };
+export { Filter }
