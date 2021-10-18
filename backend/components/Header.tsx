@@ -1,14 +1,13 @@
-import type { NextPage } from "next";
+import type { NextPage } from 'next'
 
 type HeaderProps = {
-    sair(): void;
-};
+    sair(): void
+    setShowModal(b: boolean): void
+}
 
-const Header: NextPage<HeaderProps> = ({ sair }) => {
-    const fullName = localStorage.getItem("userName");
-    const userName = fullName?.split(" ")[0];
-
-    const setShowModal = (param = false) => {};
+const Header: NextPage<HeaderProps> = ({ sair, setShowModal }) => {
+    const fullName = localStorage.getItem('userName')
+    const userName = fullName?.split(' ')[0]
 
     return (
         <div className="container-header">
@@ -25,7 +24,7 @@ const Header: NextPage<HeaderProps> = ({ sair }) => {
                 <img src="/exit-desktop.svg" alt="Deslogar" onClick={sair} />
             </div>
         </div>
-    );
-};
+    )
+}
 
-export { Header };
+export { Header }
