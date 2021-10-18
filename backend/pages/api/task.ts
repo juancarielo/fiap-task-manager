@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import moment from "moment";
 
 import connectDB from "../../middlewares/connectDB";
 import jwtValidator from "../../middlewares/jwtValidator";
@@ -40,7 +41,8 @@ const saveTask = async (req: NextApiRequest, res: NextApiResponse<DefaultRespons
             return res.status(400).json({ error: "Nome da tarefa invalida" });
         }
 
-        if (!task.finishPrevisionDate || new Date(task.finishPrevisionDate).getDate() < new Date().getDate()) {
+        //if (!task.finishPrevisionDate || new Date(task.finishPrevisionDate).getDate() < new Date().getDate()) {
+        if(!task.finishPrevisionDate || moment(task.finishPrevisionDate).isBefore(moment())){
             return res.status(400).json({ error: "Data de previsao invalida ou menor que hoje" });
         }
 
