@@ -11,7 +11,12 @@
         color: $errorColor;
         font-weight: bold;
         max-width: 300px;
+
+        &.success {
+            color: #198754;
+        }
     }
+
 
     button {
         cursor: pointer;
