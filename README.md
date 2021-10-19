@@ -13,6 +13,11 @@ cd backend
 npm i
 npm run dev
 ```
+## Run container
+To create MongoDB and mongo-express containers:
+```sh
+docker-compose up -d --build
+```
 
 [Node.js]: <https://nodejs.org/en/>
 [Next.js]: <https://nextjs.org/>
