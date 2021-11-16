@@ -160,39 +160,14 @@ const Login: NextPage<AccessTokenProps> = ({ setAccessToken }) => {
                         />
                     </div>
 
-                    {!isRegister ? (
-                        <>
-                            <button
-                                className={isLoading ? 'disabled' : ''}
-                                type="button"
-                                onClick={doLogin}
-                                disabled={isLoading}
-                            >
-                                {isLoading ? 'Carregando...' : 'Login'}
-                            </button>
-                        </>
-                    ) : (
-                        <>
-                            <div className="input">
-                                <img src="/lock.svg" alt="Fiap" />
-                                <input
-                                    type="password"
-                                    value={passwordConfirm}
-                                    onChange={(e) => setPasswordConfirm(e.target.value)}
-                                    placeholder="Confirme sua senha"
-                                />
-                            </div>
-
-                            <button
-                                className={isLoading ? 'disabled' : ''}
-                                type="button"
-                                onClick={doRegister}
-                                disabled={isLoading}
-                            >
-                                {isLoading ? 'Registrando...' : 'Register'}
-                            </button>
-                        </>
-                    )}
+                    <button
+                        className={isLoading ? 'disabled' : ''}
+                        type="button"
+                        onClick={doLogin}
+                        disabled={isLoading}
+                    >
+                        {isLoading ? 'Carregando...' : 'Login'}
+                    </button>
 
                     <p className="pt-2">or</p>
 
