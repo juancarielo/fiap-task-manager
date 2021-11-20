@@ -1,11 +1,11 @@
 // @import "~bootstrap/scss/bootstrap";
 
-// @font-face {
-//     font-family: "Biennale Regular";
-//     font-style: normal;
-//     font-weight: normal;
-//     // src: url("../fonts/BiennaleRegular.otf") format("opentype");
-// }
+@font-face {
+    font-family: "Biennale Regular";
+    font-style: normal;
+    font-weight: normal;
+    src: url("../fonts/BiennaleRegular.otf") format("opentype");
+}
 
 html {
     height: 100%;
