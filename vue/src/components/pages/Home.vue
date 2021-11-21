@@ -24,19 +24,7 @@ export default {
             finishPrevisionStart: "2021-10-01",
             finishPrevisionEnd: "2021-10-31",
             status: 2,
-            tasks: [
-                {
-                    __id: "treste",
-                    name: "asdda",
-                    finishPrevisionDate: "2021-10-02"
-                },
-                {
-                    __id: "treste",
-                    name: "asdda",
-                    finishPrevisionDate: "2021-10-02",
-                    finishDate: "2021-10-22"
-                }
-            ]
+            tasks: []
         };
     },
     created() {

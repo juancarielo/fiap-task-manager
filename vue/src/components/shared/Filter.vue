@@ -3,7 +3,7 @@
         <div class="title">
             <span>Tarefas</span>
             <img
-                src="/filter.svg"
+                src="../../assets/images/filter.svg"
                 alt="Filtrar tarefas"
                 @click="showFilters = !showFilters"
             />
