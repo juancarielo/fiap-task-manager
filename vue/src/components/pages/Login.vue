@@ -23,7 +23,7 @@
                 />
             </div>
 
-            <button class="" type="button" @click="doLogin">
+            <button type="button" @click="doLogin">
                 {{ labelButton }}
             </button>
         </form>

@@ -1,18 +1,21 @@
 <template>
     <div class="container-home">
-        <h1>Home</h1>
-        <button class="" type="button" @click="sair">Sair</button>
+        <headerCustom @doLogout="sair" />
+        <footerCustom />
     </div>
 </template>
 
 <script>
-export default {
-    methods: {
-        sair(t) {
-            localStorage.removeItem("accessToken");
-            localStorage.removeItem("userName");
-            localStorage.removeItem("userEmail");
+import Header from "../shared/Header";
+import Footer from "../shared/Footer";
 
+export default {
+    components: {
+        headerCustom: Header,
+        footerCustom: Footer
+    },
+    methods: {
+        sair() {
             this.$emit("token", "");
         }
     }
