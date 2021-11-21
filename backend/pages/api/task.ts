@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import moment from "moment";
 
+import corsHandler from "../../middlewares/cors";
 import connectDB from "../../middlewares/connectDB";
 import jwtValidator from "../../middlewares/jwtValidator";
 import { TaskModel } from "../../models/TaskModel";
@@ -172,4 +173,4 @@ const validateTaskAndReturnValue = async (req: NextApiRequest, userId: string) =
     return taskFound;
 };
 
-export default connectDB(jwtValidator(handler));
+export default corsHandler(connectDB(jwtValidator(handler)));
